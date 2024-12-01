@@ -3,8 +3,7 @@ import { pool } from "../db.js";
 /* -------------------------- VER TODAS LAS TAREAS -------------------------- */
 export const getTasks = async (req, res) => {
   try {
-    throw new Error("Error de conexion");
-    const [result] = await pool.query(
+      const [result] = await pool.query(
       "SELECT * FROM tasks ORDER BY createAt ASC"
     );
     res.json(result);
