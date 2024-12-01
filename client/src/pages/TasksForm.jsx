@@ -1,8 +1,12 @@
 import React from "react";
 import { Form, Formik } from "formik";
-import { createTaskRequest } from "../api/tasks.api";
+import { useTasks } from "../context/TaskProvider";
+
 
 function TasksForm() {
+
+  const {createTask} = useTasks()
+
   return (
     <div>
       <Formik
@@ -10,18 +14,12 @@ function TasksForm() {
           title: "",
           description: "",
         }}
-        onSubmit={ async (values, actions)=>{
-          try {
-            console.log(values)
-            const response = await createTaskRequest(values)
-            console.log(response)
-            actions.resetForm()
-          } catch (error) {
-            console.error( error)
-          }    
+        onSubmit={async (values, actions) => {
+          console.log(values);
+          createTask(values);
+          actions.resetForm();
         }}
-
-      > 
+      >
         {({ handleChange, handleSubmit, values, isSubmitting }) => (
           <Form onSubmit={handleSubmit}>
             <label>title</label>

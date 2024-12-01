@@ -1,16 +1,13 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import { getTaskRequest } from "../api/tasks.api";
 import TaskCard from "../components/TaskCard";
+import {useTasks} from "../context/TaskProvider"
 
 function TasksPage() {
-  const [tasks, setTasks] = useState([]);
+  const {tasks, loadTasks}= useTasks()
 
   useEffect(() => {
-    async function loadTasks() {
-      const response = await getTaskRequest();
-      setTasks(response.data);
-    }
+     
     loadTasks();
   }, []);
 
